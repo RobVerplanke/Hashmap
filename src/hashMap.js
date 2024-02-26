@@ -1,0 +1,55 @@
+/* eslint-disable no-restricted-syntax */
+import LinkedList from './linkedList.js';
+
+export default class HashMap {
+  constructor() {
+    this.length = 16;
+    this.occupied = 0;
+    this.buckets = new Array(this.length).fill(null).map(() => []);
+  }
+
+
+  // Generate hash code
+  hash(key) {
+    let hashCode = 0;
+    const primeNumber = 31;
+
+    for (let i = 0; i < key.length; i++) {
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.length;
+    }
+    return hashCode;
+  }
+
+
+  // Add new key:value pair to hash map or update existing value
+  set(key, value) {
+    const index = this.hash(key); // Convert key to hash code
+    const bucket = this.buckets[index]; // Corresponding bucket
+
+    if (!bucket.length) { // Bucket is empty, create new linked list and add new node
+      const newLinkedList = new LinkedList();
+
+      newLinkedList.append(key, value);
+      bucket.push(newLinkedList);
+    } else { // Bucket is not empty, add new node to existing linked list
+      for (const list of bucket) list.append(key, value);
+    }
+
+    // Update 'occupied' counter
+    this.occupied = this.countAllNodes();
+  }
+
+
+  // Get total length of all linked lists
+  countAllNodes() {
+    let totalLength = 0;
+
+    for (const bucket of this.buckets) {
+      for (const linkedList of bucket) {
+        totalLength += linkedList.getLength();
+      }
+    }
+    return totalLength;
+  }
+
+}
