@@ -24,17 +24,19 @@ const HasMap = class {
   set(key, value) {
     const index = this.hash(key); // Convert key to hash code
     const bucket = this.buckets[index]; // Corresponding bucket
+    let keyExists = false;
 
-    if (bucket.length) { // If bucket is not empty loop through item(s)
-      for (const node of bucket) {
-        if (node.key === key) node.value = value; // Key is the same as existing key, replace value
+    for (const node of bucket) { // Loop through item(s)
+      if (node.key === key) {
+        node.value = value; // Key is the same as existing key, replace value
+        keyExists = true;
       }
-      bucket.push(createNode(key, value)); // Key is not the same, add new node
-      this.occupied++;
-    } else {
-      bucket.push(createNode(key, value)); // Bucket is empty, add new node
-      this.occupied++;
     }
+
+    if (!keyExists) { // Key doesn't exist, add new node
+      bucket.push(createNode(key, value));
+    }
+
   }
 };
 
@@ -52,5 +54,7 @@ newHashMap.set('Grace', 'Martinez');
 newHashMap.set('Henry', 'Anderson');
 newHashMap.set('Isabel', 'Wong');
 newHashMap.set('Jack', 'Garcia');
+newHashMap.set('Jack', 'Gaaarcia');
+
 
 console.log(newHashMap.buckets);
