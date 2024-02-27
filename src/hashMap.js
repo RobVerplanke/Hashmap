@@ -39,6 +39,20 @@ export default class HashMap {
     this.occupied = this.countAllNodes();
   }
 
+  // Returns value that is assigned to given key
+  get(key) {
+    const index = this.hash(key); // Convert key to hash code
+    const bucket = this.buckets[index]; // Corresponding bucket
+
+    // Use find() method of each linkedList to find corresponding node
+    for (const linkedList of bucket) {
+      const foundNode = linkedList.find(key);
+      if (foundNode) {
+        return foundNode; // Return found node
+      }
+    }
+    return null; // Key was not found
+  }
 
   // Get total length of all linked lists
   countAllNodes() {
