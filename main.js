@@ -28,4 +28,9 @@ newHashMap.set('Jack', 'Garcia');
 
 // GET METHOD 'get(key)'
 
-console.log('Value of key \'Eva\': ', newHashMap.get('Eva'));
+// console.log('Value of key \'Eva\': ', newHashMap.get('Eva'));
+
+
+// GET METHOD 'has(key)'
+
+console.log('Hash map has \'Eva\': ', newHashMap.has('Ike'));
