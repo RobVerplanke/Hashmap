@@ -7,26 +7,18 @@ export default class LinkedList {
     this.length = 0;
   }
 
-
-  // getHead() {
-  //   return this.head;
-  // }
-
-  // getTail() {
-  //   return this.tail;
-  // }
-
+  // Return length of linked list
   getLength() {
     return this.length;
   }
 
 
-  // Iterate through linked list, return corresponding node or null
+  // Return corresponding node or null
   find(key) {
     let i = 0;
     let current = this.head;
 
-    while (i < this.length) {
+    while (i < this.length) { // Iterate through linked list
       if (current.key === key) return current;
       current = current.next;
       i++;
@@ -53,6 +45,7 @@ export default class LinkedList {
     if (!keyExists) { // Key doesn't exist, add new node to end of linked list
       const newNode = new Node(key, value);
 
+      // Set properties of linked list and new node
       this.tail.next = newNode;
       newNode.prev = this.tail;
       newNode.next = null;
@@ -78,4 +71,53 @@ export default class LinkedList {
     }
     this.length--;
   }
+
+
+  // Returns an array with all keys in linked list
+  getAllKeys() {
+    const allKeys = [];
+    let i = 0;
+    let currentNode = this.head;
+
+    // Iterate through the linked list and add each key to array
+    while (i < this.length) {
+      allKeys.push(currentNode.key);
+      currentNode = currentNode.next;
+      i++;
+    }
+    return allKeys;
+  }
+
+
+  // Returns an array with all values in linked list
+  getAllValues() {
+    const allValues = [];
+    let i = 0;
+    let currentNode = this.head;
+
+    // Iterate through the linked list and add each value to array
+    while (i < this.length) {
+      allValues.push(currentNode.value);
+      currentNode = currentNode.next;
+      i++;
+    }
+    return allValues;
+  }
+
+
+  // Returns array that contains all key:value pairs
+  getAllEntries() {
+    const allEntries = [];
+    let i = 0;
+    let currentNode = this.head;
+
+    // Iterate through the linked list and add each key:value pair to array
+    while (i < this.length) {
+      allEntries.push([currentNode.key, currentNode.value]);
+      currentNode = currentNode.next;
+      i++;
+    }
+    return allEntries;
+  }
+
 }

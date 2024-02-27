@@ -50,3 +50,28 @@ newHashMap.set('Jack', 'Garcia');
 // console.log('Original hash map: ', newHashMap.buckets);
 // console.log(newHashMap.remove('Frank'));
 // console.log('Updated hash map: ', newHashMap.buckets);
+
+
+// LENGTH 'length()'
+// console.log(newHashMap.length());
+
+
+// CLEAR 'clear()'
+// console.log(newHashMap);
+// newHashMap.clear();
+// console.log(newHashMap);
+
+
+// KEYS 'keys()'
+// console.log(newHashMap.buckets);
+// console.log(newHashMap.keys());
+
+
+// VALUES 'values()'
+// console.log(newHashMap.buckets);
+// console.log(newHashMap.values());
+
+
+// ENTRIES 'entries()'
+// console.log(newHashMap.buckets);
+// console.log(newHashMap.entries());

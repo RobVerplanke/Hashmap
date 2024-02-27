@@ -3,9 +3,9 @@ import LinkedList from './linkedList.js';
 
 export default class HashMap {
   constructor() {
-    this.length = 16;
+    this.size = 16;
     this.occupied = 0;
-    this.buckets = new Array(this.length).fill(null).map(() => []);
+    this.buckets = new Array(this.size).fill(null).map(() => []);
   }
 
 
@@ -15,7 +15,7 @@ export default class HashMap {
     const primeNumber = 31;
 
     for (let i = 0; i < key.length; i++) {
-      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.length;
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.size;
     }
     return hashCode;
   }
@@ -36,7 +36,7 @@ export default class HashMap {
     }
 
     // Update 'occupied' counter
-    this.occupied = this.countAllNodes();
+    this.occupied = this.length();
   }
 
 
@@ -85,14 +85,14 @@ export default class HashMap {
 
         if (linkedList.getLength() === 1) { // Only 1 item in list, remove linked list from bucket
           this.buckets[index] = [];
-          this.occupied = this.countAllNodes(); // Update 'occupied' counter
+          this.occupied = this.length(); // Update 'occupied' counter
 
           return true;
         }
 
         // Linked list has more than 1 node
         linkedList.pop(key); // Remove node
-        this.occupied = this.countAllNodes(); // Update 'occupied' counter
+        this.occupied = this.length(); // Update 'occupied' counter
 
         return true;
       }
@@ -103,15 +103,59 @@ export default class HashMap {
 
 
   // Get total length of all linked lists
-  countAllNodes() {
+  length() {
     let totalLength = 0;
 
     for (const bucket of this.buckets) {
       for (const linkedList of bucket) {
-        totalLength += linkedList.getLength();
+        totalLength += linkedList.getLength(); // Add linked list length to total
       }
     }
     return totalLength;
   }
 
+
+  // Remove all nodes in hash map
+  clear() {
+    this.buckets = new Array(this.size).fill(null).map(() => []);
+  }
+
+
+  // Returns array containing all keys in hash map
+  keys() {
+    const allKeys = [];
+
+    for (const bucket of this.buckets) {
+      for (const linkedList of bucket) {
+        allKeys.push(...linkedList.getAllKeys()); // Add all keys to array
+      }
+    }
+    return allKeys;
+  }
+
+
+  // Returns array containing all values in hash map
+  values() {
+    const allValues = [];
+
+    for (const bucket of this.buckets) {
+      for (const linkedList of bucket) {
+        allValues.push(...linkedList.getAllValues()); // Add all values to array
+      }
+    }
+    return allValues;
+  }
+
+
+  // Returns array that contains all key:value pairs
+  entries() {
+    const allEntries = [];
+
+    for (const bucket of this.buckets) {
+      for (const linkedList of bucket) {
+        allEntries.push(...linkedList.getAllEntries()); // Add all key:value pairs to array
+      }
+    }
+    return allEntries;
+  }
 }
