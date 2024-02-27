@@ -17,22 +17,23 @@ newHashMap.set('Grace', 'Martinez');
 newHashMap.set('Henry', 'Anderson');
 newHashMap.set('Isabel', 'Wong');
 newHashMap.set('Jack', 'Garcia');
-
 // console.log('Hash map: \n', newHashMap.buckets, '\n');
 
 // // Check if existing value is updated correctly
 // newHashMap.set('Jack', 'Garciaaaaa');
-
 // console.log('Edited node: \n', newHashMap.buckets[15], '\n');
 
+// ******************************************************************************
 
 // GET METHOD 'get(key)'
 // console.log('Value of key \'Eva\': ', newHashMap.get('Eva'));
 
+// ******************************************************************************
 
 // HAS METHOD 'has(key)'
 // console.log('Hash map has \'Eva\': ', newHashMap.has('Ike'));
 
+// ******************************************************************************
 
 // REMOVE METHOD 'remove(key)'
 
@@ -51,27 +52,65 @@ newHashMap.set('Jack', 'Garcia');
 // console.log(newHashMap.remove('Frank'));
 // console.log('Updated hash map: ', newHashMap.buckets);
 
+// ******************************************************************************
 
 // LENGTH 'length()'
 // console.log(newHashMap.length());
 
+// ******************************************************************************
 
 // CLEAR 'clear()'
 // console.log(newHashMap);
 // newHashMap.clear();
 // console.log(newHashMap);
 
+// ******************************************************************************
 
 // KEYS 'keys()'
 // console.log(newHashMap.buckets);
 // console.log(newHashMap.keys());
 
+// ******************************************************************************
 
 // VALUES 'values()'
 // console.log(newHashMap.buckets);
 // console.log(newHashMap.values());
 
+// ******************************************************************************
 
 // ENTRIES 'entries()'
-// console.log(newHashMap.buckets);
 // console.log(newHashMap.entries());
+
+// ******************************************************************************
+
+// LOAD FACTOR
+// spam with new nodes
+// newHashMap.set('Sophia', 'Miller');
+// newHashMap.set('Liam', 'Johnson');
+// newHashMap.set('Olivia', 'Smith');
+// newHashMap.set('Noah', 'Brown');
+// newHashMap.set('Emma', 'Williams');
+// newHashMap.set('Mia', 'Anderson');
+// newHashMap.set('Lucas', 'Garcia');
+// newHashMap.set('Ava', 'Martinez');
+// newHashMap.set('Ethan', 'Wong');
+// newHashMap.set('Isabella', 'Taylor');
+// newHashMap.set('Oliver', 'Doe');
+// newHashMap.set('Amelia', 'Jones');
+// newHashMap.set('Jackson', 'Wilson');
+// newHashMap.set('Sophie', 'Thomas');
+// newHashMap.set('Elijah', 'Lee');
+// newHashMap.set('Charlotte', 'Jackson');
+// newHashMap.set('Carter', 'Anderson');
+// newHashMap.set('Aria', 'White');
+// newHashMap.set('Ezra', 'Harris');
+// newHashMap.set('Scarlett', 'Johnson');
+
+// console.log('old capacity value: ', newHashMap.capacity);
+// console.log(newHashMap.buckets);
+
+// // improve load factor
+// newHashMap.checkLoadFactor();
+// console.log('new capacity value: ', newHashMap.capacity);
+// console.log(newHashMap.buckets);
+

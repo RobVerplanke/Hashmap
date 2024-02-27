@@ -1,23 +1,63 @@
 /* eslint-disable no-restricted-syntax */
 import LinkedList from './linkedList.js';
 
+// Load factor: for calculating efficiency (0,75 is optimal)
+const MIN_LOAD_FACTOR = 0.5;
+const MAX_LOAD_FACTOR = 1;
+const INITIAL_CAPACITY = 8;
+
 export default class HashMap {
   constructor() {
-    this.size = 16;
+    this.capacity = INITIAL_CAPACITY;
+    this.minLoadFactor = MIN_LOAD_FACTOR;
+    this.maxLoadFactor = MAX_LOAD_FACTOR;
     this.occupied = 0;
-    this.buckets = new Array(this.size).fill(null).map(() => []);
+    this.buckets = new Array(this.capacity).fill(null).map(() => []);
   }
 
-
-  // Generate hash code
+  // Generate hash code (number between 0 and the capacity size)
   hash(key) {
     let hashCode = 0;
     const primeNumber = 31;
 
     for (let i = 0; i < key.length; i++) {
-      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.size;
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
     }
     return hashCode;
+  }
+
+
+  // Check and adjust balance if needed
+  checkLoadFactor() {
+    let currentFactor = Math.round((this.occupied / this.capacity) * 100) / 100; // 2 decimals
+
+    while (currentFactor < this.minLoadFactor) { // Current load factor is to low
+      const storedPairs = [...this.entries()]; // Store all key:value pairs
+
+      // Resize bucket array: cut in half
+      this.capacity /= 2;
+      this.buckets = new Array(this.capacity).fill(null).map(() => []);
+
+      // Add stored key:value pairs
+      storedPairs.forEach((pair) => this.set(pair[0], pair[1]));
+
+      // Calculate new load factor
+      currentFactor = Math.round((this.occupied / this.capacity) * 100) / 100;
+    }
+
+    while (currentFactor > this.maxLoadFactor) { // Current load factor is to high
+      const storedPairs = [...this.entries()]; // Store all key:values pairs
+
+      // Resize bucket array: double in size
+      this.capacity *= 2;
+      this.buckets = new Array(this.capacity).fill(null).map(() => []);
+
+      // Add stored key:value pairs
+      storedPairs.forEach((pair) => this.set(pair[0], pair[1]));
+
+      // Calculate new load factor
+      currentFactor = Math.round((this.occupied / this.capacity) * 100) / 100;
+    }
   }
 
 
@@ -32,7 +72,8 @@ export default class HashMap {
       newLinkedList.append(key, value);
       bucket.push(newLinkedList);
     } else { // Bucket is not empty, add new node to existing linked list
-      for (const list of bucket) list.append(key, value);
+      // for (const list of bucket) list.append(key, value);
+      bucket.forEach((list) => list.append(key, value));
     }
 
     // Update 'occupied' counter
@@ -46,11 +87,15 @@ export default class HashMap {
     const bucket = this.buckets[index]; // Corresponding bucket
 
     // Use find() method of each linkedList to find corresponding node
+    // bucket.forEach((linkedList) => {
+    //   const foundNode = linkedList.find(key);
+    //   if (foundNode) return foundNode.value; // Return value
+    //   return null;
+    // });
+
     for (const linkedList of bucket) {
       const foundNode = linkedList.find(key);
-      if (foundNode) {
-        return foundNode; // Return found node
-      }
+      if (foundNode) return foundNode.value; // Return found node
     }
     return null; // Key was not found
   }
@@ -117,7 +162,8 @@ export default class HashMap {
 
   // Remove all nodes in hash map
   clear() {
-    this.buckets = new Array(this.size).fill(null).map(() => []);
+    this.buckets = new Array(this.capacity).fill(null).map(() => []);
+    this.occupied = this.length(); // Update 'occupied' counter
   }
 
 
