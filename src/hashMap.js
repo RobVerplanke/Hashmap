@@ -68,8 +68,39 @@ export default class HashMap {
         return true; // Key was found
       }
     }
-    return false; // Key was not found
+    return false; // Key was not found or corresponding bucket is empty
   }
+
+
+  // Remove node and return true, return false if node doesn't exist
+  remove(key) {
+    const index = this.hash(key); // Convert key to hash code
+    const bucket = this.buckets[index]; // Corresponding bucket
+
+    // Use find() method of each linkedList to find corresponding node
+    for (const linkedList of bucket) {
+      const foundNode = linkedList.find(key);
+
+      if (foundNode) { // Key is found
+
+        if (linkedList.getLength() === 1) { // Only 1 item in list, remove linked list from bucket
+          this.buckets[index] = [];
+          this.occupied = this.countAllNodes(); // Update 'occupied' counter
+
+          return true;
+        }
+
+        // Linked list has more than 1 node
+        linkedList.pop(key); // Remove node
+        this.occupied = this.countAllNodes(); // Update 'occupied' counter
+
+        return true;
+      }
+    }
+
+    return false; // Key was not found or corresponding bucket is empty
+  }
+
 
   // Get total length of all linked lists
   countAllNodes() {

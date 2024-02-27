@@ -27,10 +27,26 @@ newHashMap.set('Jack', 'Garcia');
 
 
 // GET METHOD 'get(key)'
-
 // console.log('Value of key \'Eva\': ', newHashMap.get('Eva'));
 
 
-// GET METHOD 'has(key)'
+// HAS METHOD 'has(key)'
+// console.log('Hash map has \'Eva\': ', newHashMap.has('Ike'));
 
-console.log('Hash map has \'Eva\': ', newHashMap.has('Ike'));
+
+// REMOVE METHOD 'remove(key)'
+
+// Only 1 node in linked list
+// console.log('Original hash map: ', newHashMap);
+// console.log(newHashMap.remove('John'));
+// console.log('Updated hash map: ', newHashMap);
+
+// 2 nodes in linked list
+// console.log('Original hash map: ', newHashMap.buckets);
+// console.log(newHashMap.remove('Alice'));
+// console.log('Updated hash map: ', newHashMap.buckets);
+
+// 3 nodes in linked list, remove middle node
+// console.log('Original hash map: ', newHashMap.buckets);
+// console.log(newHashMap.remove('Frank'));
+// console.log('Updated hash map: ', newHashMap.buckets);

@@ -35,7 +35,7 @@ export default class LinkedList {
   }
 
 
-  // Add new key:value pair to linked list or update existing node
+  // Add new node to linked list or update existing node
   append(key, value) {
     let keyExists = false;
 
@@ -59,5 +59,23 @@ export default class LinkedList {
       this.tail = newNode;
       this.length++;
     }
+  }
+
+
+  // Remove node from linked list (method is called when linked list has more than 1 node)
+  pop(key) {
+    const node = this.find(key);
+
+    if (this.head.key === node.key) { // Found node is head of linked list
+      this.head = this.head.next;
+      this.head.prev = null;
+    } else if (this.tail.key === node.key) { // Found node is tail of linked list
+      this.tail = this.tail.prev;
+      this.tail.next = null;
+    } else { // Found node is not the head or tail
+      node.next.prev = node.prev;
+      node.prev.next = node.next;
+    }
+    this.length--;
   }
 }
