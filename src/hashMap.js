@@ -69,10 +69,10 @@ export default class HashMap {
     const index = this.hash(key); // Convert key to hash code
     const bucket = this.buckets[index]; // Corresponding bucket
 
-    if (!bucket.length) { // Bucket is empty, create new linked list and add new node
+    if (!bucket.length) { // Bucket is empty, create new linked list
       const newLinkedList = new LinkedList();
 
-      newLinkedList.append(key, value);
+      newLinkedList.append(key, value); // Append method replaces existing value or makes new node
       bucket.push(newLinkedList);
     } else { // Bucket is not empty, add new node to existing linked list
       bucket.forEach((list) => list.append(key, value));

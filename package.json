@@ -5,7 +5,7 @@
     "eslint-plugin-import": "^2.29.1"
   },
   "name": "hashmap",
-  "description": "Start by creating a HashMap class or factory function. It’s up to you which you want to use. Then proceed to create the following methods:",
+  "description": "Create a HashMap class or factory function and add methods.",
   "version": "1.0.0",
   "main": "main.js",
   "type": "module",

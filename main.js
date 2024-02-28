@@ -17,12 +17,12 @@ newHashMap.set('Grace', 'Martinez');
 newHashMap.set('Henry', 'Anderson');
 newHashMap.set('Isabel', 'Wong');
 newHashMap.set('Jack', 'Garcia');
-// console.log('Hash map: \n', newHashMap.buckets, '\n');
+console.log('Hash map: \n', newHashMap.buckets, '\n');
 
-// // Check if value is updated correctly
-// console.log('Edited node: \n', newHashMap.buckets[7], '\n');
-// newHashMap.set('Jack', 'Garciaaaaa');
-// console.log('Edited node: \n', newHashMap.buckets[7], '\n');
+// Check if value is updated correctly
+console.log('Edited node: \n', newHashMap.buckets[7], '\n');
+newHashMap.set('Jack', 'Garciaaaaa');
+console.log('Edited node: \n', newHashMap.buckets[7], '\n');
 
 // ******************************************************************************
 
@@ -107,10 +107,10 @@ newHashMap.set('Jack', 'Garcia');
 // newHashMap.set('Ezra', 'Harris');
 // newHashMap.set('Scarlett', 'Johnson');
 
-console.log('old capacity value: ', newHashMap.capacity);
-console.log(newHashMap);
+// console.log('old capacity value: ', newHashMap.capacity);
+// console.log(newHashMap);
 
-// improve load factor
-newHashMap.checkLoadFactor(); // Doubles array capacity
-console.log(newHashMap);
+// // improve load factor
+// newHashMap.checkLoadFactor(); // Doubles array capacity
+// console.log(newHashMap);
 
