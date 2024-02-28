@@ -27,9 +27,12 @@ export default class HashMap {
   }
 
 
-  // Check and adjust balance if needed
+  // Check and adjust capacity/occupied balance if needed
   checkLoadFactor() {
+
+    // Calculate current load factor
     let currentFactor = Math.round((this.occupied / this.capacity) * 100) / 100; // 2 decimals
+    console.log('current load factor: ', currentFactor);
 
     while (currentFactor < this.minLoadFactor) { // Current load factor is to low
       const storedPairs = [...this.entries()]; // Store all key:value pairs
@@ -72,7 +75,6 @@ export default class HashMap {
       newLinkedList.append(key, value);
       bucket.push(newLinkedList);
     } else { // Bucket is not empty, add new node to existing linked list
-      // for (const list of bucket) list.append(key, value);
       bucket.forEach((list) => list.append(key, value));
     }
 
@@ -87,12 +89,6 @@ export default class HashMap {
     const bucket = this.buckets[index]; // Corresponding bucket
 
     // Use find() method of each linkedList to find corresponding node
-    // bucket.forEach((linkedList) => {
-    //   const foundNode = linkedList.find(key);
-    //   if (foundNode) return foundNode.value; // Return value
-    //   return null;
-    // });
-
     for (const linkedList of bucket) {
       const foundNode = linkedList.find(key);
       if (foundNode) return foundNode.value; // Return found node
@@ -142,7 +138,6 @@ export default class HashMap {
         return true;
       }
     }
-
     return false; // Key was not found or corresponding bucket is empty
   }
 
@@ -151,9 +146,10 @@ export default class HashMap {
   length() {
     let totalLength = 0;
 
+    // Use getLength() method of each linkedList to get its length
     for (const bucket of this.buckets) {
       for (const linkedList of bucket) {
-        totalLength += linkedList.getLength(); // Add linked list length to total
+        totalLength += linkedList.getLength(); // Add length to total
       }
     }
     return totalLength;

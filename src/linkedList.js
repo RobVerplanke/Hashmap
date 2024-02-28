@@ -16,11 +16,11 @@ export default class LinkedList {
   // Return corresponding node or null
   find(key) {
     let i = 0;
-    let current = this.head;
+    let currentNode = this.head;
 
     while (i < this.length) { // Iterate through linked list
-      if (current.key === key) return current;
-      current = current.next;
+      if (currentNode.key === key) return currentNode;
+      currentNode = currentNode.next;
       i++;
     }
     return null;
